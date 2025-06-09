@@ -8,7 +8,7 @@ three_lst = lst[2::3]
 
 # 합/평균 계산 
 even_sum = sum(even_lst)
-avr = sum(three_lst) / len(three_lst)
+avr = round(sum(three_lst) / len(three_lst), 1)
 
 print(even_sum, end=' ')
 print(avr)
