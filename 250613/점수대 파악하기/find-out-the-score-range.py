@@ -6,7 +6,7 @@ for score in lst:
     if score == 0:
         break
 
-    elif score > 10:
+    elif score >= 10:
         n = (score//10) -1
         count[n] += 1
 
