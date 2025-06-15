@@ -3,7 +3,7 @@ price = list(map(int, input().split()))
 
 # Please write your code here.
 # 최저가 매입 
-min_val = min(price)
+min_val = min(price[:n])
 i = price.index(min_val)
 
 # 매입 이후 가격만 남기기 
