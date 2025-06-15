@@ -1,19 +1,13 @@
 n = int(input())
-price = list(map(int, input().split()))
+prices = list(map(int, input().split()))
 
 # Please write your code here.
-# 최저가 매입 
-min_val = min(price[:n])
-i = price.index(min_val)
+min_price = float('inf')
+profit = 0
 
-# 매입 이후 가격만 남기기 
-price = price[i:]
+# 최소값 갱신하면서 최대이익 찾기 
+for price in prices:
+    min_price = min(price, min_price)
+    profit = max(price-min_price, profit)
 
-# 이익 계산
-money = max(price) - min_val
-
-# 이익 없으면 0 출력 
-if money <=0:
-    print("0")
-else:
-    print(money)
+print(profit)
