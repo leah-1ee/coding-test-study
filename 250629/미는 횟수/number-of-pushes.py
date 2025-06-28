@@ -3,9 +3,10 @@ B = input()
 flag = False
 
 for i in range(len(A)):
-    A = A[i:] + A[:i]
-    if A == B:
-        print(i+1)
+    rotated = A[i:] + A[:i]
+    
+    if rotated == B:
+        print(i)
         flag = True
         break
 
