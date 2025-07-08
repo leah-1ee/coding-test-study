@@ -3,10 +3,9 @@ def solution(d, budget):
     cnt = 0
     
     for n in d:
-        budget -= n
-        if budget < 0:
+        if budget < n:
             break
-        else:
-            cnt += 1
+        budget -= n
+        cnt += 1
     
     return cnt
