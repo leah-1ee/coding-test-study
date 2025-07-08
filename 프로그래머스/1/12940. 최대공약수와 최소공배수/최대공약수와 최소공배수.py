@@ -12,3 +12,12 @@ def solution(n, m):
             break
         
     return answer
+
+# math 라이브러리 이용 
+import math
+
+def solution(n, m):
+    gcd = math.gcd(n, m)
+    lcm = n * m // gcd
+        
+    return [gcd, lcm]
