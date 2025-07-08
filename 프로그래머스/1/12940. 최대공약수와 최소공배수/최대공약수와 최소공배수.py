@@ -14,6 +14,9 @@ def solution(n, m):
     return answer
 
 # math 라이브러리 이용 
+# 최대공약수(gcd) 함수: math.gcd(a, b)
+# 최소공배수(lcm): a*b // gcd
+
 import math
 
 def solution(n, m):
