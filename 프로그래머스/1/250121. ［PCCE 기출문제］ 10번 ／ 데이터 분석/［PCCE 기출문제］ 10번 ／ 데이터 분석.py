@@ -23,3 +23,20 @@ def solution(data, ext, val_ext, sort_by):
         answer.sort(key=lambda x: x[3])
 
     return answer
+
+
+def solution(data, ext, val_ext, sort_by):
+    index_map = {
+        "code" : 0,
+        "data" : 1,
+        "maximum" : 2,
+        "remain" : 3
+    }
+
+    idx_ext = index_map[ext]
+    idx_sort = index_map[sort_by]
+
+    answer = [d for d in data if data[idx_ext] < val_ext]
+    answer.sort(key = lambda x: x[idx_sort])
+
+    return answer
