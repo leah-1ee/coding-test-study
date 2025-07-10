@@ -15,8 +15,8 @@ class Tile:
         self.color = 'N'
 
 # Tile 배열, 음수 인덱스 방지 위한 시작 지점 설정 
-tiles = [Tile() for _ in range(10000)]
-start = 5000
+tiles = [Tile() for _ in range(100000)]
+start = 50000
 
 # 타일 칠하기, 시작 포함 끝 포함하지 않음 (방향상관없이) 
 # 끝부분 포함하지 않으므로 start 갱신 시 뒤로 한 칸
