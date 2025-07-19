@@ -7,5 +7,5 @@ for i in range(n):
 
 h = s/n
 
-print(f"{s} {h}")
+print(f"{s} {h:.1f}")
 
