@@ -9,7 +9,6 @@ for i in num:
 s=sum(result)
 l=len(result)
 
-print(s, end=" ")
-print(s/l)
+print(f"{s} {s/l:.1f}")
     
     
