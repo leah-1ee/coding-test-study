@@ -3,7 +3,7 @@ lst=[]
 
 for i in n:
     if i==0:
-        continue
+        break
     elif i%2==0:
         lst.append(i/2)
     else:
