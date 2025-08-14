@@ -4,7 +4,7 @@
 
 | <span style="color:red;display:block;text-align:center;"> **성취도**</span> | 결과 |
 |---|---|
-| 총 문제 수 | 18 |
+| 총 문제 수 | 10 |
 | 획득 경험치 | 290 / 240 XP |
 | 연속 학습 일 | 4 일 |
 
