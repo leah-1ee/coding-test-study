@@ -4,7 +4,7 @@
 
 | <span style="color:red;display:block;text-align:center;"> **성취도**</span> | 결과 |
 |---|---|
-| 총 문제 수 | 12 |
+| 총 문제 수 | 4 |
 | 획득 경험치 | 150 / 240 XP |
 | 연속 학습 일 | 2 일 |
 
@@ -16,14 +16,7 @@
 |[Trail 2 / 시뮬레이션 I / 사각형 칠하기](https://www.codetree.ai/trail-info/novice-mid/)|[[Concept]겹치지 않는 사각형의 넓이](https://www.codetree.ai/trails/complete/curated-cards/intro-area-of-non-overlapping-rectangle/)|보통|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EA%B2%B9%EC%B9%98%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EC%82%AC%EA%B0%81%ED%98%95%EC%9D%98%20%EB%84%93%EC%9D%B4/area-of-non-overlapping-rectangle.py)|
 |[Trail 2 / 시뮬레이션 I / 사각형 칠하기](https://www.codetree.ai/trail-info/novice-mid/)|[[Challenge]색종이의 총 넓이](https://www.codetree.ai/trails/complete/curated-cards/challenge-the-total-area-of-colored-paper/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%83%89%EC%A2%85%EC%9D%B4%EC%9D%98%20%EC%B4%9D%20%EB%84%93%EC%9D%B4/the-total-area-of-colored-paper.py)|
 |[Trail 2 / 시뮬레이션 I / 사각형 칠하기](https://www.codetree.ai/trail-info/novice-mid/)|[[Challenge]잔해물을 덮기 위한 사각형의 최소 넓이](https://www.codetree.ai/trails/complete/curated-cards/challenge-minimum-area-of-rectangle-to-cover-debris/)|보통|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%9E%94%ED%95%B4%EB%AC%BC%EC%9D%84%20%EB%8D%AE%EA%B8%B0%20%EC%9C%84%ED%95%9C%20%EC%82%AC%EA%B0%81%ED%98%95%EC%9D%98%20%EC%B5%9C%EC%86%8C%20%EB%84%93%EC%9D%B4/minimum-area-of-rectangle-to-cover-debris.py)|
-|[Trail 0 / 다중 반복문 / 2중 반복문 입문](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]직사각형 별표 출력하기](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-2d-loop-basics-1/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%A7%81%EC%82%AC%EA%B0%81%ED%98%95%20%EB%B3%84%ED%91%9C%20%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0/print-stars-in-rectangle.c)|
-|[Trail 0 / 다중 반복문 / 반복 횟수의 제어](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]별표 출력하기 2](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-dependent-loops-1/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EB%B3%84%ED%91%9C%20%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0%202/print-star-2.c)|
-|[Trail 0 / 다중 반복문 / 반복 횟수의 제어](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]직각 삼각형 출력](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-dependent-loops-2/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%A7%81%EA%B0%81%20%EC%82%BC%EA%B0%81%ED%98%95%20%EC%B6%9C%EB%A0%A5/Right-triangle-and-output.c)|
-|[Trail 0 / 다중 반복문 / 2중 반복문 응용](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]정상적인 구구단](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-nested-loop-output-1/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%A0%95%EC%83%81%EC%A0%81%EC%9D%B8%20%EA%B5%AC%EA%B5%AC%EB%8B%A8/normal-multiple.c)|
-|[Trail 0 / 다중 반복문 / 2중 반복문 응용](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]숫자 피라미드](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-nested-loop-output-2/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%88%AB%EC%9E%90%20%ED%94%BC%EB%9D%BC%EB%AF%B8%EB%93%9C/number-pyramid.c)|
-|[Trail 0 / 다중 반복문 / 반복문을 반복하기](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]짝수의 합 n번 구하기](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-1d-loop-repetition-1/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%A7%9D%EC%88%98%EC%9D%98%20%ED%95%A9%20n%EB%B2%88%20%EA%B5%AC%ED%95%98%EA%B8%B0/find-the-sum-of-even-numbers-n-times.c)|
-|[Trail 0 / 다중 반복문 / 반복문을 반복하기](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]약수가 세 개인 수](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-1d-loop-repetition-2/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%95%BD%EC%88%98%EA%B0%80%20%EC%84%B8%20%EA%B0%9C%EC%9D%B8%20%EC%88%98/numbers-with-three-divisors.c)|
-|[Trail 0 / 다중 반복문 / 2중 반복문에서의 변수 사용](https://www.codetree.ai/trail-info/codetree-101/)|[[Challenge]숫자 피라미드 2](https://www.codetree.ai/trails/complete/curated-cards/nl-pre-2d-loop-variables-1/)|쉬움|Solved|[링크](https://github.com/leah-1ee/coding-test-study/blob/main/250713/%EC%88%AB%EC%9E%90%20%ED%94%BC%EB%9D%BC%EB%AF%B8%EB%93%9C%202/number-pyramid-2.c)|
+
 
 
 <br />
