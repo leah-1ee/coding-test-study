@@ -12,8 +12,8 @@ cnt = 0
 r, c = 0, 0
 
 # 첫 번째 점프 
-for nr in range(1, R-1):
-    for nc in range(1, C-1):
+for nr in range(1, R-2):
+    for nc in range(1, C-2):
         # 색 다른 곳으로 점프 
         if grid[r][c] != grid[nr][nc]:
             # 두 번째 점프 
@@ -21,6 +21,12 @@ for nr in range(1, R-1):
                 for nnc in range(nc+1, C-1):
                     # 색 다른 곳으로 점프 
                     if grid[nr][nc] != grid[nnr][nnc]:
-                        cnt += 1
+                        # 세 번째 점프는 없어야 함 
+                        for nnnr in range(nnr+1, R):
+                            for nnnc in range(nnc+1, C):
+                                # 도착 지점 도달 시 조건 3 만족 
+                                if grid[nnr][nnc] != grid[nnnr][nnnc] and\
+                                nnnr == R-1 and nnnc == C-1:
+                                    cnt += 1
 
 print(cnt)
