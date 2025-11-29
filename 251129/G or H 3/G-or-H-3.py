@@ -8,7 +8,8 @@ for _ in range(n):
 
 # Please write your code here.
 # 위치에 따른 알파벳 기록할 배열 
-arr = [0] * (max(x)+1)
+max_val = max(max(x)+1, k+1)
+arr = [0] * max_val
 
 # 알파벳 기록 
 for i in range(len(x)):
