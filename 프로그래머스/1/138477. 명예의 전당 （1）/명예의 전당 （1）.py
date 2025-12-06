@@ -1,3 +1,5 @@
+import heapq
+
 def solution(k, scores):
     # 최하위 점수 기록 배열, 명예의 전당 배열 
     answer = []
@@ -5,16 +7,13 @@ def solution(k, scores):
     
     for score in scores:
         # 명예의 전당 목록 채우기 
-        if len(answer) < k:
-            honor.append(score)
+        heapq.heappush(honor, score)
+        
+        # 명예의 전당 명 수 초과 -> 가장 낮은 점수 삭제 
+        if len(honor) > k:
+            heapq.heappop(honor)
             
-        else:
-            # 더 높은 점수가 나오면 
-            if score > min(honor):
-                # 기존 점수 삭제, 새 점수 기록 
-                honor.remove(min(honor))
-                honor.append(score)
-            
-        # 최하위 점수 기록 
-        answer.append(min(honor))
+        # 최하위 점수 정답배열에 추가 
+        answer.append(honor[0])
+        
     return answer
