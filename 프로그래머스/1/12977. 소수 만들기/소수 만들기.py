@@ -1,21 +1,28 @@
+from itertools import combinations
+
+# 소수 판별 함수
+def is_prime(num):
+
+    if num < 2:
+        return False
+    
+    for i in range(2, int(num**0.5)+1):
+        if num % i == 0:
+            return False
+    
+    return True
+
+
 def solution(nums):
 
-    cnt = 0        # 소수 개수
-    n = len(nums)  # 주어진 숫자 수
-
-    # 3개 수를 고르는 모든 조합 
-    for i in range(n-2):
-        for j in range(i+1, n-1):
-            for k in range(j+1, n):
-                # 세 수의 합
-                num = nums[i] + nums[j] + nums[k]
-                # 약수 있으면 break
-                for l in range(2, int(num**0.5)+1):
-                    if num % l == 0:
-                        break
-                # 약수 없으면(=소수이면) cnt +1
-                else:
-                    cnt += 1
-                        
+    cnt = 0
+    
+    # 3개 수 모든 조합 
+    for comb in combinations(nums, 3):
+        total = sum(comb)
+        
+        # 소수면 cnt +1
+        if is_prime(total):
+            cnt += 1
 
     return cnt
