@@ -2,24 +2,17 @@
 # 롤러 사이즈 m
 
 def solution(n, m, sections):
-    # 페인트칠 횟수 기록 
-    cnt = 0
+     
+    cnt = 0     # 페인트칠 횟수
+    painted = 0 # 롤러가 닿은 마지막 위치
     
-    # 페인트가 칠해지지 않은 벽 False로 표시 
-    wall = [True] * (n+1)
+    
     for section in sections:
-        wall[section] = False
-        
-    # 페인트칠이 필요한 영역에 대해
-    for section in sections:
-        if wall[section] == False:
-            # 페인트칠 
-            for i in range(section, section + m):
-                # 범위 확인 
-                if i <= n:
-                    wall[i] = True
-            # 페인트칠 횟수 증가 
+        # 마지막으로 페인트를 칠한 구역 |  | 목표 구역(안 칠해짐)
+        if painted < section:
+            # 페인트칠
             cnt += 1
-
-    
+            # 마지막으로 칠해진 구역 기록 
+            painted = section + m - 1
+   
     return cnt
