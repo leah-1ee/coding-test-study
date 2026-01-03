@@ -1,26 +1,18 @@
+from string import ascii_lowercase
 def solution(s, skip, index):
     answer = ''
     
-    # 문자열 s의 각 알파벳 alp에 대하여 
-    for alp in s:
-        # index 만큼 뒤의 알파벳으로 
-        for _ in range(index):
-            # 알파벳이 z를 넘어갈 경우 a로 
-            if (ord(alp) + 1) > ord('z'):
-                alp = 'a'
-            # z 넘지 않으면 뒤의 알파벳으로 
-            else:
-                alp = chr(ord(alp) + 1)
-            
-            # skip을 벗어날 때까지 뒤로 한 칸씩
-            while (alp in skip):
-                if (ord(alp) + 1) > ord('z'):
-                    alp = 'a'
-                else:
-                    alp = chr(ord(alp) + 1)
-                    
-        # 만들어진 알파벳 추가 
-        answer += alp
-                
+    # 전체 알파벳에서 skip 제외한 알파벳 배열 생성 
+    valid_alpha = [char for char in ascii_lowercase if char not in skip]
     
+    for char in s:
+        # 현재 문자 위치 찾음
+        curr_pos = valid_alpha.index(char)
+        
+        # index 만큼 이동, 리스트 순회 
+        new_pos = (curr_pos + index) % len(valid_alpha)
+        
+        # 변환 완료된 알파벳 정답 문자열에 추가 
+        answer += valid_alpha[new_pos]
+
     return answer
