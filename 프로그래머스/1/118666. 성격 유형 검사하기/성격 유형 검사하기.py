@@ -2,16 +2,7 @@ def solution(survey, choices):
     answer = ''
     
     # 성격 유형별 점수를 저장하는 딕셔너리 
-    personality = {
-        'R':0,
-        'T':0,
-        'C':0,
-        'F':0,
-        'J':0,
-        'M':0,
-        'A':0,
-        'N':0
-    }
+    personality = {k:0 for k in 'RTCFJMAN'}
     
     # 성격 유형 점수 계산 
     for char, num in zip(survey, choices):
@@ -22,21 +13,14 @@ def solution(survey, choices):
         else:
             personality[char[1]] += (num-4)
     
-    # 유형 알파벳, 값을 각각 리스트로 만들기 
-    key_list = list(personality.keys())
-    value_list = list(personality.values())
+    # 결과 산출
+    # 비교해야 할 지표를 미리 정의 
+    indicators = [('R', 'T'), ('C', 'F'), ('J', 'M'), ('A', 'N')]
     
-    # 성격 유형 정의: 값이 큰 알파벳, 값이 같다면 순서가 먼저인 알파벳 
-    i, j = 0, 1
-    for _ in range(4):
-        if value_list[i] > value_list[j]:
-            answer += key_list[i]
-        elif value_list[i] < value_list[j]:
-            answer += key_list[j]
+    for type1, type2 in indicators:
+        if personality[type1] >= personality[type2]:
+            answer += type1
         else:
-            answer += key_list[i] if key_list[i] < key_list[j] else key_list[j]
-            
-        i += 2
-        j += 2
+            answer += type2
     
     return answer
