@@ -10,7 +10,7 @@ def area_check(N, M, grid):
   return cnt
 
 
-def mark(r, c, d, grid):
+def mark(r, c, d, grid, N, M):
   dr = [-1, 0, 1, 0]
   dc = [0, 1, 0, -1]
   marked = []
@@ -41,7 +41,7 @@ def CCTV(N, M, grid, CCTV_list, idx):
   r, c, k = CCTV_list[idx]
   if k == 1:
     for d in range(4):
-      marked, grid = mark(r, c, d, grid)
+      marked, grid = mark(r, c, d, grid, N, M)
 
       CCTV(N, M, grid, CCTV_list, idx+1)
 
@@ -49,8 +49,8 @@ def CCTV(N, M, grid, CCTV_list, idx):
   
   elif k == 2:
     for d in range(2):
-      marked1, grid = mark(r, c, d, grid)
-      marked2, grid = mark(r, c, d+2, grid)
+      marked1, grid = mark(r, c, d, grid, N, M)
+      marked2, grid = mark(r, c, d+2, grid, N, M)
 
       CCTV(N, M, grid, CCTV_list, idx+1)
 
@@ -59,8 +59,8 @@ def CCTV(N, M, grid, CCTV_list, idx):
       
   elif k == 3:
     for d in range(4):
-      marked1, grid = mark(r, c, d, grid)
-      marked2, grid = mark(r, c, (d+1)%4, grid)
+      marked1, grid = mark(r, c, d, grid, N, M)
+      marked2, grid = mark(r, c, (d+1)%4, grid, N, M)
 
       CCTV(N, M, grid, CCTV_list, idx+1)
 
@@ -70,9 +70,9 @@ def CCTV(N, M, grid, CCTV_list, idx):
 
   elif k == 4:
     for d in range(4):
-      marked1, grid = mark(r, c, d, grid)
-      marked2, grid = mark(r, c, (d+1)%4, grid)
-      marked3, grid = mark(r, c, (d+2)%4, grid)
+      marked1, grid = mark(r, c, d, grid, N, M)
+      marked2, grid = mark(r, c, (d+1)%4, grid, N, M)
+      marked3, grid = mark(r, c, (d+2)%4, grid, N, M)
 
       CCTV(N, M, grid, CCTV_list, idx+1)
 
@@ -81,10 +81,10 @@ def CCTV(N, M, grid, CCTV_list, idx):
       grid = unmark(marked3, grid)
       
   else:
-    marked1, grid = mark(r, c, 0, grid)
-    marked2, grid = mark(r, c, 1, grid)
-    marked3, grid = mark(r, c, 2, grid)
-    marked4, grid = mark(r, c, 3, grid)
+    marked1, grid = mark(r, c, 0, grid, N, M)
+    marked2, grid = mark(r, c, 1, grid, N, M)
+    marked3, grid = mark(r, c, 2, grid, N, M)
+    marked4, grid = mark(r, c, 3, grid, N, M)
 
     CCTV(N, M, grid, CCTV_list, idx+1)
 
