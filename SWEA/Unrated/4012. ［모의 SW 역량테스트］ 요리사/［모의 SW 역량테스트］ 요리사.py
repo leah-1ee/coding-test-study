@@ -36,38 +36,51 @@ print(f)                                문자열 1개 출력하는 예제
 # import sys
 # sys.stdin = open("sample_input.txt", "r")
 
-from itertools import combinations, permutations
-
-
 T = int(input())
+
+
+def taste(ingredients, grid):
+    taste_val = 0
+    for i in ingredients:
+        for j in ingredients:
+            if i != j:
+                taste_val += grid[i][j]
+    return taste_val
+
+def dfs(N, idx, selected):
+    global min_diff
+    if len(selected) == N // 2:
+        A_ingredients = selected[:]
+        B_ingredients = [x for x in range(N) if x not in A_ingredients]
+
+        A_taste = taste(A_ingredients, grid)
+        B_taste = taste(B_ingredients, grid)
+
+        diff = abs(A_taste - B_taste)
+        min_diff = min(min_diff, diff)
+
+        return
+
+    for i in range(idx, N):
+        selected.append(i)
+        dfs(N, i+1, selected)
+        selected.pop()
+
+
 
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
     # ///////////////////////////////////////////////////////////////////////////////////
-
     N = int(input())
     grid = []
     for _ in range(N):
         grid.append(list(map(int, input().split())))
 
-    least_diff = 1000000
+    min_diff = 1000000
 
-    for ingredients in combinations(range(N), N//2):
-        combo = list(permutations(ingredients, 2))
-        A = 0
-        for i, j in combo:
-            A += grid[i][j]
+    dfs(N, 0, [])
 
-        left_ingredients = [x for x in range(N) if x not in ingredients]
-        left_combo = list(permutations(left_ingredients, 2))
-        B = 0
-        for i, j in left_combo:
-            B += grid[i][j]
-
-        diff = abs(A-B)
-        least_diff = min(least_diff, diff)
-
-    print(f"#{test_case} {least_diff}")
+    print(f"#{test_case} {min_diff}")
 
 
 
