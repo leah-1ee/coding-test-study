@@ -26,14 +26,13 @@ bool isZeroCol(int c, const vector<vector<int>>& temp) {
 	return true;
 }
 
-auto bfs(int col, vector<vector<int>>& temp) {
+void bfs(int col, vector<vector<int>>& temp) {
 	queue<Block> q;
-	vector<vector<bool>> visited(H, vector<bool>(W, false));
 
 	for (int r = 0; r < H; r++) {
 		if (temp[r][col] != 0) {
 			q.push({ r, col, temp[r][col] });
-			visited[r][col] = true;
+
 			break;
 		}
 	}
@@ -52,7 +51,7 @@ auto bfs(int col, vector<vector<int>>& temp) {
 				int nc = c + dc[d] * p;
 
 				if (nr < 0 || H <= nr || nc < 0 || W <= nc) break;
-				visited[nr][nc] = true;
+
 				if (temp[nr][nc] != 0) {
 					q.push({ nr, nc, temp[nr][nc] });
 					temp[nr][nc] = 0;
@@ -63,11 +62,9 @@ auto bfs(int col, vector<vector<int>>& temp) {
 		}
 	}
 
-	return temp;
-
 }
 
-auto gravity(vector<vector<int>>& temp) {
+void gravity(vector<vector<int>>& temp) {
 	for (int c = 0; c < W; c++) {
 		vector<int> nonzero;
 		for (int r = 0; r < H; r++) {
@@ -81,7 +78,6 @@ auto gravity(vector<vector<int>>& temp) {
 		}
 	}
 	
-	return temp;
 }
 
 int countBlock(const vector<vector<int>>& temp) {
@@ -116,10 +112,10 @@ void dfs(int depth, vector<vector<int>> v) {
 
 		if (!isZeroCol(c, temp)) {
 			// 제거 BFS 
-			temp = bfs(c, temp);
+			bfs(c, temp);
 
 			// 중력
-			temp = gravity(temp);
+			gravity(temp);
 		}
 
 		// 재귀 
