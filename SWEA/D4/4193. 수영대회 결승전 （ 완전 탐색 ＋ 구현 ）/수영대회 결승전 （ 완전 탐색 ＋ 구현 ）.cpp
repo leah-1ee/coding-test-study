@@ -4,16 +4,13 @@
 
 using namespace std;
 
-/*
-소용돌이 없는 시간: 2,5,8,... time%3==2
-*/
-
 struct Node
 {
-	int r;
-	int c;
-	int time;
+	int r; int c; int t;
 };
+
+int dr[4] = { -1,1,0,0 };
+int dc[4] = { 0,0,-1,1 };
 
 int main(int argc, char** argv)
 {
@@ -23,63 +20,58 @@ int main(int argc, char** argv)
 
 	for (test_case = 1; test_case <= T; ++test_case)
 	{
+		int answer = -1;
 
 		int n;
 		cin >> n;
-		bool goal = false;
 
 		vector<vector<int>> grid(n, vector<int>(n));
-		vector<vector<bool>> visited(n, vector<bool>(n, false));
-
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				cin >> grid[i][j];
 			}
 		}
 
-		int sR, sC, eR, eC;
-		cin >> sR >> sC >> eR >> eC;
+		int sr, sc, er, ec;
+		cin >> sr >> sc >> er >> ec;
 
-		int dr[4] = { -1,1,0,0 };
-		int dc[4] = { 0,0,-1,1 };
-
-		int answer = -1;
 		queue<Node> q;
-		q.push({ sR, sC, 0 });
-		visited[sR][sC] = true;
-		
-		while (!q.empty()) {
+		q.push({ sr,sc,0 });
 
-			int r = q.front().r;
-			int c = q.front().c;
-			int time = q.front().time;
+		vector<vector<bool>> visited(n, vector<bool>(n, false));
+
+		visited[sr][sc] = true;
+
+		while (!q.empty()) {
+			Node cur = q.front();
 			q.pop();
 
-			if (r == eR && c == eC) {
-				goal = true;
-				answer = time;
+			if (cur.r == er && cur.c == ec) {
+				answer = cur.t;
 				break;
 			}
 
 			for (int d = 0; d < 4; d++) {
-				int nr = r + dr[d];
-				int nc = c + dc[d];
+				int nr = cur.r + dr[d];
+				int nc = cur.c + dc[d];
 
-				if (0 <= nr && nr < n && 0 <= nc && nc < n && !visited[nr][nc] && grid[nr][nc] != 1) {
-					if (grid[nr][nc] == 0 ||(grid[nr][nc] == 2 && time % 3 == 2)) {
-						visited[nr][nc] = true;
-						q.push({ nr, nc, time + 1 });
+				bool isRange = (0 <= nr && nr < n && 0 <= nc && nc < n);
+				if (isRange && !visited[nr][nc] && grid[nr][nc] != 1) {
+					if (grid[nr][nc] == 2 && cur.t % 3 != 2) {
+						q.push({ cur.r, cur.c, cur.t + 1 });
+						continue;
 					}
-					else if (grid[nr][nc] == 2 && time % 3 != 2) {
-						q.push({ r, c, time + 1 });
-					}
+						
+
+					q.push({ nr, nc, cur.t + 1 });
+					visited[nr][nc] = true;
+
 				}
-			}
 
+			}
 		}
 
-		if(goal) cout << "#" << test_case << " " << answer << "\n";
-		else cout << "#" << test_case << " " << answer << "\n";
+		cout << "#" << test_case << " " << answer << "\n";
 
 	}
 	return 0;//정상종료시 반드시 0을 리턴해야합니다.
