@@ -14,7 +14,8 @@ int dfs(const vector<vector<int>>& room, int r, int c, int n) {
 		int nc = c + dc[d];
 
 		if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
-		if (room[nr][nc] != room[r][c] + 1) continue;
+		if (room[r][c] + 1 != room[nr][nc]) continue;
+
 		cnt += dfs(room, nr, nc, n);
 	}
 
@@ -25,7 +26,7 @@ int main(int argc, char** argv)
 {
 	int test_case;
 	int T;
-	
+
 	cin >> T;
 
 	for (test_case = 1; test_case <= T; ++test_case)
@@ -47,13 +48,10 @@ int main(int argc, char** argv)
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-
 				int temp = dfs(room, i, j, n);
-				if (temp > maxRoom ||
-					(temp == maxRoom && startRoom>room[i][j])
-					) {
-					startRoom = room[i][j];
+				if (temp > maxRoom || (temp == maxRoom && startRoom > room[i][j])) {
 					maxRoom = temp;
+					startRoom = room[i][j];
 				}
 			}
 		}
