@@ -4,15 +4,14 @@
 #include <set>
 
 using namespace std;
-
 set<string> numbers;
 
 int dr[4] = { -1,1,0,0 };
 int dc[4] = { 0,0,-1,1 };
 
-void dfs(const vector<vector<char>>& grid, int r, int c, int level, string s) {
-	if (level == 7) {
-		numbers.insert(s);
+void dfs(const vector<vector<char>>& grid, int depth, string result, int r, int c) {
+	if (depth == 7) {
+		numbers.insert(result);
 		return;
 	}
 
@@ -21,7 +20,7 @@ void dfs(const vector<vector<char>>& grid, int r, int c, int level, string s) {
 		int nc = c + dc[d];
 
 		if (nr < 0 || nr >= 4 || nc < 0 || nc >= 4) continue;
-		dfs(grid, nr, nc, level + 1, s + grid[nr][nc]);
+		dfs(grid, depth + 1, result + grid[nr][nc], nr, nc);
 	}
 
 }
@@ -33,23 +32,21 @@ int main(int argc, char** argv)
 
 	cin >> T;
 
+	
+
 	for (test_case = 1; test_case <= T; ++test_case)
 	{
-
-		vector<vector<char>> grid(4, vector<char>(4));
-
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				cin >> grid[i][j];
-			}
-		}
-
 		numbers.clear();
 
+		vector<vector<char>> grid(4, vector<char>(4));
+		for (auto &row : grid)
+			for (auto &v : row)
+				cin >> v;
+
+
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				string s(1, grid[i][j]);
-				dfs(grid, i, j, 1, s);
+				dfs(grid, 1, string(1, grid[i][j]), i, j);
 			}
 		}
 
