@@ -3,7 +3,6 @@
 #include <queue>
 #include <string>
 #include <climits>
-#include <tuple>
 #include <functional>
 
 using namespace std;
@@ -11,46 +10,55 @@ using namespace std;
 int dr[4] = { -1,1,0,0 };
 int dc[4] = { 0,0,-1,1 };
 
+struct Node
+{
+	int val; int r; int c;
+};
+
+struct Compare
+{
+	bool operator()(const Node& a, const Node& b) const {
+		return a.val > b.val;
+	}
+};
+
 int solve() {
 	int n;
 	cin >> n;
 
 	vector<string> raw(n);
-	for (int i = 0; i < n; i++) {
-		cin >> raw[i];
-	}
+	for (string &s : raw)
+		cin >> s;
 
 	vector<vector<int>> grid(n, vector<int>(n));
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
 			grid[i][j] = raw[i][j] - '0';
-		}
-	}
 
 	vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
 
-	priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<>> pq;
+	priority_queue<Node, vector<Node>, Compare> pq;
 
 	dist[0][0] = 0;
 	pq.push({ 0,0,0 });
 
 	while (!pq.empty()) {
-		auto[d, r, c] = pq.top(); pq.pop();
+		auto[v, r, c] = pq.top();
+		pq.pop();
 
-		if (d > dist[r][c]) continue;
+		if (v > dist[r][c]) continue;
 
-		if (r == n - 1 && c == n - 1) break;
+		for (int d = 0; d < 4; d++) {
+			int nr = r + dr[d];
+			int nc = c + dc[d];
 
-		for (int dir = 0; dir < 4; dir++) {
-			int nr = r + dr[dir];
-			int nc = c + dc[dir];
-
-			if (nr<0 || nr>=n || nc<0 || nc>=n) continue;
-
-			int ncost = d + grid[nr][nc];
-			if (ncost < dist[nr][nc]) {
-				dist[nr][nc] = ncost;
-				pq.push({ ncost,nr,nc });
+			bool isRange = (0 <= nr && nr < n && 0 <= nc && nc < n);
+			if (isRange) {
+				int newVal = v + grid[nr][nc];
+				if (newVal < dist[nr][nc]) {
+					dist[nr][nc] = newVal;
+					pq.push({ newVal,nr,nc });
+				}
 			}
 		}
 	}
