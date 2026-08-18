@@ -12,20 +12,16 @@ int startR, startC;
 int answer;
 
 void dfs(const vector<vector<int>>& grid, int dir, int r, int c, int n, int cnt, vector<bool>& dessert) {
-	
-
-	// 방향: 현재 방향 or 다음 방향
 	for (int d = dir; d <= dir + 1 && d < 4; d++) {
 		int nr = r + dr[d];
 		int nc = c + dc[d];
 
-		if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
-
 		if (nr == startR && nc == startC) {
 			if (d == 3) answer = max(answer, cnt);
-			continue;
+			return;
 		}
 
+		if (nr < 0 || nr >= n || nc < 0 || nc >= n) continue;
 		if (dessert[grid[nr][nc]]) continue;
 		dessert[grid[nr][nc]] = true;
 		dfs(grid, d, nr, nc, n, cnt + 1, dessert);
@@ -38,7 +34,7 @@ int main(int argc, char** argv)
 {
 	int test_case;
 	int T;
-	
+
 	cin >> T;
 
 	for (test_case = 1; test_case <= T; ++test_case)
@@ -59,13 +55,9 @@ int main(int argc, char** argv)
 
 		for (int i = 0; i < n - 2; i++) {
 			for (int j = 1; j < n - 1; j++) {
-				startR = i;
-				startC = j;
-
 				vector<bool> dessert(101, false);
-
 				dessert[grid[i][j]] = true;
-
+				startR = i; startC = j;
 				dfs(grid, 0, i, j, n, 1, dessert);
 			}
 		}
