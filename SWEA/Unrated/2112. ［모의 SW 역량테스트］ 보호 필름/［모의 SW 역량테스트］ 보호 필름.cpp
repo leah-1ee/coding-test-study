@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <climits>
 
 using namespace std;
 
@@ -11,53 +12,48 @@ int bestInput;
 
 bool test() {
 	for (int i = 0; i < w; i++) {
-		int film = 1;
-		bool ok = false;
-
+		int streak = 1;
 		for (int j = 1; j < d; j++) {
-			if (temp[j][i] == temp[j - 1][i]) film++;
-			else film = 1;
-			if (film >= k) {
-				ok = true;
-				break;
-			}
+			if (streak >= k) break;
+			if (temp[j][i] == temp[j - 1][i]) streak++;
+			else streak = 1;
 		}
-		if (!ok) return false;
-		
+		if (streak >= k) continue;
+		return false;
 	}
 	return true;
 }
 
-void dfs(int curInput, int start) {	
-
-	if (curInput > bestInput) return;
+void dfs(int input, int depth) {
+	if (input >= bestInput) return;
 
 	if (test()) {
-		bestInput = min(bestInput, curInput);
+		bestInput = min(bestInput, input);
 		return;
 	}
 
-	for (int i = start; i < d; i++) {
-		// A
-		for (int j = 0; j < w; j++)
-			temp[i][j] = 0;
+	if (depth == d)
+		return;
 
-		dfs(curInput + 1, i+1);
-
-		for (int j = 0; j < w; j++)
-			temp[i][j] = grid[i][j];
-
-		// B
-		for (int j = 0; j < w; j++)
-			temp[i][j] = 1;
-
-		dfs(curInput + 1, i+1);
-
-		for (int j = 0; j < w; j++)
-			temp[i][j] = grid[i][j];
-
-		
+	for (int i = 0; i < w; i++) {
+		temp[depth][i] = 0;
 	}
+	dfs(input + 1, depth + 1);
+	for (int i = 0; i < w; i++) {
+		temp[depth][i] = grid[depth][i];
+	}
+		
+
+	for (int i = 0; i < w; i++) {
+		temp[depth][i] = 1;
+	}
+	dfs(input + 1, depth + 1);
+	for (int i = 0; i < w; i++) {
+		temp[depth][i] = grid[depth][i];
+	}
+	
+
+	dfs(input, depth + 1);
 }
 
 int main(int argc, char** argv)
@@ -71,24 +67,18 @@ int main(int argc, char** argv)
 	{
 		cin >> d >> w >> k;
 		grid.assign(d, vector<int>(w));
-
-
-		// 0 = A, 1 = B
-		for (int i = 0; i < d; i++) {
-			for (int j = 0; j < w; j++) {
-				cin >> grid[i][j];
+		for (auto& row : grid) {
+			for (auto& v : row) {
+				cin >> v;
 			}
 		}
 
 		temp = grid;
 
-		bestInput = k;
-
-
+		bestInput = INT_MAX;
 		dfs(0, 0);
 
 		cout << "#" << test_case << " " << bestInput << "\n";
-
 	}
 	return 0;
 }
