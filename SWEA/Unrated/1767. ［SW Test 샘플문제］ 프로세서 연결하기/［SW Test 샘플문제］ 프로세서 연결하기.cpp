@@ -1,163 +1,88 @@
 #include <iostream>
 #include <vector>
- 
+
 using namespace std;
-
+vector<vector<bool>> visited;
 vector<pair<int, int>> cores;
-int core = 0, len = 0;
+int bestCore, bestLen, n;
 
-void dfs(
-	vector<vector<bool>>& visited,
-	int n,
-	int curCore,
-	int curLen,
-	int idx
-) {
-	// 가지치기 core
-	if (curCore + (cores.size() - idx) < core) return;
+int dr[4] = { -1,1,0,0 };
+int dc[4] = { 0,0,-1,1 };
 
-	// 가지치기 len 
-	if ((curCore + (cores.size() - idx) == core) && curLen > len) return;
+bool canPlace(int dist, int r, int c, int d) {
+	for (int i = 1; i <= dist; i++) {
+		if (visited[r + dr[d] * i][c + dc[d] * i]) return false;
+	}
+	return true;
+}
 
-	// 종료조건 
+void Place(int dist, int r, int c, int d, bool flag) {
+	for (int i = 1; i <= dist; i++) {
+		visited[r + dr[d] * i][c + dc[d] * i] = flag;
+	}
+}
+
+void dfs(int curCore, int curLen, int idx) {
+	int remain = cores.size() - idx;
+	if (curCore + remain < bestCore) return;
+	if (curCore + remain == bestCore && curLen > bestLen) return;
+
 	if (idx == cores.size()) {
-		if (curCore > core) {
-			core = curCore;
-			len = curLen;
+		if (curCore > bestCore || (curCore == bestCore && curLen < bestLen)) {
+			bestCore = curCore;
+			bestLen = curLen;
 		}
-		if (curCore == core && curLen < len) len = curLen;
 		return;
 	}
 
-	int r = cores[idx].first;
-	int c = cores[idx].second;
 
-	// top r
-	int top = r;
-	bool flag = true;
+	auto[r, c] = cores[idx];
 
-	for (int i = 1; i <= top; i++) {
-		if (visited[r - i][c] == true) {
-			flag = false;
-			break;
-		}
-	}
-	if (flag) {
-		for (int i = 1; i <= top; i++) {
-			visited[r - i][c] = true;
-		}
-		dfs(visited, n, curCore + 1, curLen + top, idx + 1);
-		for (int i = 1; i <= top; i++) {
-			visited[r - i][c] = false;
+	// 상하좌우 길이
+	int dist[4] = { r, n - 1 - r, c, n - 1 - c };
+
+	for (int d = 0; d < 4; d++) {
+			
+		if (canPlace(dist[d], r, c, d)) {
+			Place(dist[d], r, c, d, true);
+			dfs(curCore + 1, curLen + dist[d], idx+1);
+			Place(dist[d], r, c, d, false);
 		}
 	}
 
+	dfs(curCore, curLen, idx + 1);
 
-	// left c
-	int left = c;
-	flag = true;
-
-	for (int i = 1; i <= left; i++) {
-		if (visited[r][c - i] == true) {
-			flag = false;
-			break;
-		}
-	}
-	if (flag) {
-		for (int i = 1; i <= left; i++) {
-			visited[r][c - i] = true;
-		}
-		dfs(visited, n, curCore + 1, curLen + left, idx + 1);
-		for (int i = 1; i <= left; i++) {
-			visited[r][c - i] = false;
-		}
-	}
-
-	// bottom n - 1 - r
-	int bottom = n - 1 - r;
-	flag = true;
-
-	for (int i = 1; i <= bottom; i++) {
-		if (visited[r + i][c] == true) {
-			flag = false;
-			break;
-		}
-	}
-	if (flag) {
-		for (int i = 1; i <= bottom; i++) {
-			visited[r + i][c] = true;
-		}
-		dfs(visited, n, curCore + 1, curLen + bottom, idx + 1);
-		for (int i = 1; i <= bottom; i++) {
-			visited[r + i][c] = false;
-		}
-	}
-
-	// right n - 1 - c
-	int right = n - 1 - c;
-	flag = true;
-
-	for (int i = 1; i <= right; i++) {
-		if (visited[r][c + i] == true) {
-			flag = false;
-			break;
-		}
-	}
-	if (flag) {
-		for (int i = 1; i <= right; i++) {
-			visited[r][c + i] = true;
-		}
-		dfs(visited, n, curCore + 1, curLen + right, idx + 1);
-		for (int i = 1; i <= right; i++) {
-			visited[r][c + i] = false;
-		}
-	}
-
-	// x
-	dfs(visited, n, curCore, curLen, idx + 1);
 }
 
-int main(int argc, char** argv)
-{
-	int test_case;
-	int T;
-	
-	cin >> T;
-
-	for (test_case = 1; test_case <= T; ++test_case)
-	{
-
-		core = 0;
-		len = 0;
-		cores.clear();
-
-		int n;
+int main() {
+	int T; cin >> T;
+	for (int tc = 1; tc <= T; tc++) {
 		cin >> n;
 
 		vector<vector<int>> grid(n, vector<int>(n));
+		for (auto& row : grid) for (auto& v : row) cin >> v;
 
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				cin >> grid[i][j];
-			}
-		}
+		visited.assign(n, vector<bool>(n, false));
+		cores.clear();
 
-		vector<vector<bool>> visited(n, vector<bool>(n, false));
-
+		int sideCore = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (grid[i][j] == 1) {
 					visited[i][j] = true;
-					if (i == 0 || i == n - 1 || j == 0 || j == n - 1) core++;
-					else cores.push_back({ i,j });
+					if (i == 0 || i == n - 1 || j == 0 || j == n - 1) {
+						sideCore++;
+					}
+					else cores.push_back({ i, j });
 				}
 			}
 		}
+		bestCore = sideCore;
+		bestLen = 0;
 
-		dfs(visited, n, core, 0, 0);
+		dfs(sideCore, 0, 0);
 
-		cout << "#" << test_case << " " << len << "\n";
+		cout << "#" << tc << " " << bestLen << "\n";
 
 	}
-	return 0;//정상종료시 반드시 0을 리턴해야합니다.
 }
