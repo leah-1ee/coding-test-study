@@ -5,25 +5,25 @@
 using namespace std;
 
 string vowels = "AEIOU";
-vector<string> words;
 
-void dfs(string cur){
-    if(cur.size() == 5) return;
+vector<string> dictionary;
+
+void dfs(string word){
+    if(word.size() == 5) return;
     
-    for(char c : vowels) {
-        string next = cur + c;
-        words.push_back(next);
+    for(char c:vowels){
+        string next = word + c;
+        dictionary.push_back(next);
         dfs(next);
     }
+
 }
 
 int solution(string word) {
-    int answer = 0;
     
     dfs("");
-    
-    auto it = find(words.begin(), words.end(), word);
-    int index = it - words.begin();
+    auto it = find(dictionary.begin(), dictionary.end(), word);
+    int index = it - dictionary.begin();
     
     return index + 1;
 }
